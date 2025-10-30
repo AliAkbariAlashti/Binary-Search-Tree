@@ -51,6 +51,22 @@ class BST:
         if value < node.value:
             return self._search(node.left, value)
         return self._search(node.right, value)
+    
+    def get_path(self, value):
+        """Get the path from root to a node"""
+        path = []
+        node = self.root
+        
+        while node:
+            path.append(node.value)
+            if value == node.value:
+                return path
+            elif value < node.value:
+                node = node.left
+            else:
+                node = node.right
+        
+        return None  # Not found
 
     def delete(self, value):
         """Delete a value"""

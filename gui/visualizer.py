@@ -51,6 +51,7 @@ class BSTVisualizer(tk.Tk):
         ttk.Button(controls, text='Insert', command=self.insert).pack(fill='x', pady=2)
         ttk.Button(controls, text='Search', command=self.search).pack(fill='x', pady=2)
         ttk.Button(controls, text='Delete', command=self.delete).pack(fill='x', pady=2)
+        ttk.Button(controls, text='Show Path', command=self.show_path).pack(fill='x', pady=2)
         
         ttk.Separator(controls).pack(fill='x', pady=10)
         
@@ -107,6 +108,19 @@ class BSTVisualizer(tk.Tk):
         node = self.bst.search(value)
         if node:
             self.log(f'Found {value}')
+        else:
+            self.log(f'{value} not found')
+    
+    def show_path(self):
+        """Show path from root to node"""
+        value = self.get_value()
+        if value is None:
+            return
+        
+        path = self.bst.get_path(value)
+        if path:
+            path_str = ' → '.join(map(str, path))
+            self.log(f'Path to {value}: {path_str}')
         else:
             self.log(f'{value} not found')
     
